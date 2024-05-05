@@ -1,0 +1,4 @@
+.login-container{
+    background-color: #1A629C; margin-top: -40px; width: 729px; height: 86%; z-index: 100; position: absolute;
+    box-shadow: -10px -10px 10px rgba(10, 10, 10, 0.1);
+}

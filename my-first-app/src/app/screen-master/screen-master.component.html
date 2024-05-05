@@ -1,0 +1,76 @@
+<div style="background-color: #F4F7FA;">
+    <div style="margin: 1%;">
+      <button class="btn btn-outline-primary" style="float: right" (click)="createNewScreen()">
+        + Add New Screen
+      </button>
+            <h1 style="font-weight: 600; font-size: 25px; color: #4D4D4D;">Available Screens</h1>
+    </div>
+    
+    <div style="margin: 1%; padding: 10px; background-color: #FFFFFF; border-radius: 10px;">
+        <div style="display: flex;">
+            <input type="text" class="form-control" style="width: 30%; margin-bottom: 5px;" (keyup)="applyFilter($event.target.value)">
+            <button class="btn btn-sm btn-outline-success" style="margin-left: auto; height: 95%;" (click)="exportToExcel()">
+              <i class="fa-solid fa-download" style="margin-right: 5px;"></i> Export Data
+            </button>
+          </div>
+
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="screenId">
+              <th style="width: 100px" mat-header-cell *matHeaderCellDef mat-sort-header> Screen ID </th>
+              <td mat-cell *matCellDef="let element"> {{ element.screenId }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="screenName">
+              <th style="width: 250px" mat-header-cell *matHeaderCellDef mat-sort-header> Screen Name </th>
+              <td mat-cell *matCellDef="let element"> {{ element.screenName }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="screenDetails">
+              <th style="width: 700px" mat-header-cell *matHeaderCellDef mat-sort-header> Screen Description </th>
+              <td mat-cell *matCellDef="let element"> {{ element.screenDetails }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="AvailableOptions">
+              <th style="width: 250px" mat-header-cell *matHeaderCellDef mat-sort-header> Available Option </th>
+              <td mat-cell *matCellDef="let element">
+              <div style="display: flex;">
+                <label for="">C</label>
+                <input type="checkbox" class="accessCheckbox" [(ngModel)]="element.canCreate" disabled>
+                <label for="">R</label>
+                <input type="checkbox" class="accessCheckbox" [(ngModel)]="element.canRead" disabled>
+                <label for="">U</label>
+                <input type="checkbox" class="accessCheckbox" [(ngModel)]="element.canUpdate" disabled>
+                <label for="">D</label>
+                <input type="checkbox" class="accessCheckbox" [(ngModel)]="element.canDelete" disabled>
+              </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="activeInactive">
+              <th style="width: 10%" mat-header-cell *matHeaderCellDef mat-sort-header> Screen Status </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.activeInactive" style="background-color: #CEF3DA; padding: 3px; border-radius: 5px;">Active</span>
+                <span *ngIf="!element.activeInactive" style="background-color: #FECFCC; padding: 3px; border-radius: 5px;">Inactive</span>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+              <th style="width: 100px" mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+              <td mat-cell *matCellDef="let element"> 
+              <div style="display: flex;">
+                <i class="fa-solid fa-pen-to-square icon" style="color: blue;"></i>
+                <i class="fa-solid fa-eye icon" style="color: green;"></i>
+                <i class="fa-solid fa-trash icon" style="color: red;"></i>
+              </div>
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-table>
+        
+          <!-- Add pagination -->
+          <mat-paginator [pageSizeOptions]="[10,20, 30, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+  

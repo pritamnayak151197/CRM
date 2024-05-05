@@ -1,0 +1,90 @@
+.profileView{
+  margin-right: 50px;
+}
+
+
+.profile-details {
+  width: 100%; /* Or specify a specific width */
+  max-width: 100%; /* Optional: restricts the maximum width */
+  overflow-x: hidden;
+}
+
+span{
+  font-size: smaller;
+  color: #777777;
+}
+
+.add{
+  font-size: 15px;
+
+}
+
+.passInput{
+  width: 40%;
+}
+
+h3{
+  color: blueviolet;
+}
+
+.profile-header{
+
+background: url(../../assets/images/Img.png);
+border-radius: 0px 0px 8px 8px;
+background-size: 100% 100%;
+height: 160px;
+background-repeat: no-repeat;
+padding: 1%;
+position: relative;
+
+
+}
+
+.overlay {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px; /* Adjust padding as needed */
+  text-align: center;
+  color: aliceblue;
+}
+
+.overlay p {
+  margin: 0; /* Remove default margins */
+}
+
+
+.profile-pic {
+  width: 130px;
+  height: 130px;
+  border-radius: 100%;
+  object-fit: cover; /* Ensures the image fills its container without stretching */
+  float: left;
+  border: solid 4px white;
+
+
+  position: absolute;
+  top: 93%;
+  left: 6%;
+  transform: translate(-50%, -50%);
+}
+
+.tabs{
+  margin-left: 5px;
+}
+
+.empDetailsLabel{
+  width: 200px; 
+  padding: 5px ;
+  font-size: medium;
+}
+
+.empDetailsValue{
+  width: 200px; 
+  padding: 5px;
+  font-weight: 500;
+  font-size: medium;
+}
+
+

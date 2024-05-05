@@ -1,0 +1,17 @@
+
+  .fpass{
+    margin-top: 20% !important;
+  }
+  .otp{
+    width: 40px;
+    margin: 10px;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.otp-form{
+  margin-top: 10%;
+}

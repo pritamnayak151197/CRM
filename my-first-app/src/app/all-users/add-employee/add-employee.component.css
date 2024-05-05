@@ -1,0 +1,30 @@
+.addEmployeeDetails{
+    margin-bottom: 5px;
+   
+}
+
+
+.placeholder-avatar {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.custom-select .mat-select-trigger .mat-select-arrow {
+  color: orange !important;
+}
+
+::ng-deep .mat-select-arrow {
+  color: orange; /* Change this to your desired color */
+}
+
+.form-control {
+  border-color: #2497C4; /* Change this to your desired color */
+}
+
+label{
+  margin-bottom: 3px;
+  font-weight: 400;
+  color: #696969;
+}

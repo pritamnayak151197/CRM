@@ -1,0 +1,276 @@
+<button type="button" class="btn close" style="float: right;" (click)="onCloseClick()">
+  <i class="fa-solid fa-xmark"></i>
+</button>
+<h1 mat-dialog-title>New Employee Profile</h1>
+
+
+<mat-horizontal-stepper>
+  <mat-step label="Employee Details">
+    
+
+
+    <div class="row">
+      <div class="col-md-2">
+        <!-- <div class="row" style="padding-left: 4%;">
+          <div *ngIf="selectedFile; else placeholder">
+            <img [src]="selectedFileUrl" alt="Profile Picture" style="height: 100px; width: 100px; border-radius: 100%;">
+          </div>
+          <ng-template #placeholder>
+            <div class="placeholder-avatar"></div>
+          </ng-template>
+        </div> -->
+        <!-- <div style="display: flex;"><input type="file" class="form-control" 
+            (change)="onFileSelected($event)"  accept="image/*">
+          <button class="btn btn-primary" style="margin-left: 5px;"
+            (click)="uploadProfilePicture()"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+        </div> -->
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+
+        <label for="">First Name</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeeData.firstName" required>
+
+
+        <label for="">Work Email Id</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeeData.email" required>
+
+
+        <label for="">Designation</label>
+        <mat-select class="addEmployeeDetails form-control" required (selectionChange)="onSelectDesignation($event.value)">
+          <mat-option *ngFor="let desination of designationList" aria-placeholder="Please Select" [value]="desination.designationId">
+            {{ desination.designationName }}
+          </mat-option>
+        </mat-select>
+
+
+        <label for="">Hired On</label><br>
+          <div style="display: flex;">
+            <input  class="form-control" [matDatepicker]="picker1" [value]="SelectedHireDate" (dateChange)="onDateChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker1" style="float:right; color: orange; border: solid 1px #2497C4; border-radius: 5px; margin-left: 1px;"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+          </div>
+          
+   
+
+        <label for="" style="display: block;">Department Head</label>
+        <mat-select class="addEmployeeDetails form-control" required>
+          <mat-option *ngFor="let employee of employeeList" aria-placeholder="Please Select" [value]="employee.empId">
+            {{ employee.firstName }} {{employee.lastName}}
+          </mat-option>
+        </mat-select>
+
+
+        <label for="" style="display: block;">Employee Extention Number</label>
+        <input class="addEmployeeDetails form-control" type="number" [(ngModel)]="employeeData.extensionNumber">
+
+        <label for="" style="display: block;">Shift</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectShift($event.value)" required>
+          <mat-option *ngFor="let shift of shiftList" aria-placeholder="Please Select" [value]="shift.shiftId">
+            {{ shift.shiftName }}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+
+        <label for="">Last Name</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeeData.lastName">
+
+        <label for="">Work Mobile No</label>
+        <input class="addEmployeeDetails form-control" type="tel" [(ngModel)]="employeeData.phone">
+
+        <label for="">Employment Type</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeeData.employeeType">
+
+        <label for="" style="display: block;">Department Name</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectDepartment($event.value)">
+          <mat-option *ngFor="let departMent of departMentList" aria-placeholder="Please Select" [value]="departMent.departmentId">
+            {{ departMent.departmentName }}
+          </mat-option>
+        </mat-select>
+
+        <label for="" style="display: block;">Reporting Manager</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectReportingManager($event.value)">
+          <mat-option *ngFor="let employee of employeeList" aria-placeholder="Please Select" [value]="employee.empId">
+            {{ employee.firstName }} {{employee.lastName}}
+          </mat-option>
+        </mat-select>
+
+        <label for="" style="display: block;">Company Name</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectCompanyId($event.value)">
+          <mat-option *ngFor="let company of companyList" aria-placeholder="Please Select" [value]="company.companyId">
+            {{ company.companyName }}
+          </mat-option>
+        </mat-select>
+
+        <label for="" style="display: block;">Employee Status</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectStatus($event.value)" required>
+          <mat-option *ngFor="let status of statusList" aria-placeholder="Please Select" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+
+    <div class="container">
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext
+        (click)="addEmployee()">Save & Next</button>
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Back</button>
+    </div>
+
+  </mat-step>
+  <mat-step label="Personal Info">
+    <div class="row">
+  
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+
+        <label for="">Date Of Birth</label>
+          <div style="display: flex;">
+            <input  class="form-control" [matDatepicker]="picker2" [value]="selectedDob" (change)="dobChange($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker2" style="float:right; color: orange; border: solid 1px #2497C4; border-radius: 5px; margin-left: 1px;"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+          </div>
+
+
+        <label for="">Gender</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectGender($event.value)">
+          <mat-option *ngFor="let gender of genders" aria-placeholder="Please Select" [value]="gender">
+            {{ gender }}
+          </mat-option>
+        </mat-select>
+
+
+        <label for="">Personal Mobile Number</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeePersonalInfo.homeNumber" required>
+
+        <label for="">UID Number</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeePersonalInfo.uidNumber" required>
+
+        <label for="">Highest Educational Qualification</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeePersonalInfo.highestQualification" required>
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+
+        <label for="">Maritial Status</label>
+        <mat-select class="addEmployeeDetails form-control" (selectionChange)="onSelectMaritalStatus($event.value)">
+          <mat-option *ngFor="let status of maritalStatuses" aria-placeholder="Please Select" [value]="status">
+            {{ status }}
+          </mat-option>
+        </mat-select>
+
+        <label for="">Marriage Anniversary Date</label>
+        <div style="display: flex;">
+          <input  class="form-control" [matDatepicker]="picker3" [value]="selectedAnniversaryDate" 
+          (dateChange)="onDateChangeAnniversaryDate($event)">
+        <mat-datepicker-toggle matSuffix [for]="picker3" style="float:right; color: orange; border: solid 1px #2497C4; border-radius: 5px; margin-left: 1px;"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+        </div>
+
+        <label for="">Personal E-mail</label>
+        <input class="addEmployeeDetails form-control" type="text" [(ngModel)]="employeePersonalInfo.personalEmail">
+
+        <label for="" style="display: block;">Total professional Experience</label>
+        <input type="text" class="form-control" [(ngModel)]="employeePersonalInfo.totalExperience">
+
+        <label for="" style="display: block;">PAN Number</label>
+        <input type="text" class="form-control" [(ngModel)]="employeePersonalInfo.panNumber">
+      </div>
+
+    </div>
+    <div class="container">
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Back</button>
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext
+        (click)="addEmployeePersonalInfo()">Save & Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Address">
+    <div class="row">
+      <span style="font-weight: 500; font-size: 25px; margin-left: 20%; color: #636363;">Current Address</span>
+      <div class="col-md-2"></div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+       
+        <label for="">Country</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">City</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">Address Line 1</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+        <label for="">Pin Code</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">State</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">Address Line 2 (Optional)</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+      </div>
+
+    </div>
+
+    <div class="row">
+      <span style="font-weight: 500; font-size: 25px; margin-left: 20%; color: #636363;">Permanent Address</span>
+      <div class="col-md-2"></div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+        
+        <label for="">Country</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">City</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">Address Line 1</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+        <label for="">Pin Code</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">State</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">Address Line 2 (Optional)</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+      </div>
+
+    </div>
+    <div class="container">
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Back</button>
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Save & Next -></button>
+    </div>
+  </mat-step>
+  <mat-step label="Login Credentials">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+        <h3 style="font-weight: 500;">Creating Credential for a new User</h3>
+        <label for="">Password</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">Confirm Password</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+        <label for="">City</label>
+        <input class="addEmployeeDetails form-control" type="text">
+
+      </div>
+      <div class="col-md-5" style="padding: 1% 5% 5% 5%;">
+       
+      </div>
+
+    </div>
+    <div class="container">
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Back</button>
+      <button class="btn btn-primary" style="margin-right: 5px; float: right;" matStepperNext>Save & Next</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

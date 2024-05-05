@@ -1,0 +1,13 @@
+tr.mat-header-row {
+    height: 35px !important;
+    background-color: #F4F7FA;
+  }
+  
+
+  th.mat-header-cell{
+    padding-top: 8px;
+  }
+  td{
+    padding-top: 10px !important;
+  }
+    
